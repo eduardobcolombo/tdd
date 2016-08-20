@@ -20,13 +20,7 @@ class Cart
 
     public function applyCupom(Cupom $cupom)
     {
-        // it is incorrect because the business logics be in cupom
-        if ($cupom->getType() == "percent") {
-            $c = $this->total * $cupom->getTotal() / 100;
-        } else {
-            $c = $cupom->getTotal();
-        }
-        $this->total -= $c;
+        $this->total = $cupom->getTotal($this->total);
     }
 
     public function getTotal()

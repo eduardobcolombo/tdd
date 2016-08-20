@@ -5,6 +5,7 @@ namespace CodeEducation\Cart\Tests;
 use CodeEducation\Cart\Cart;
 use CodeEducation\Cart\ProductX;
 use CodeEducation\Cart\Cupom;
+use CodeEducation\Cart\CupomPercentage;
 
 class CartTest extends \PHPUnit_Framework_TestCase
 {
@@ -61,8 +62,7 @@ class CartTest extends \PHPUnit_Framework_TestCase
         $productX->method('getName')->willReturn("Product MOCKED");
 
         $cupom = $this->getMockBuilder(Cupom::class)->getMock();
-        $cupom->method('getTotal')->willReturn(10);
-        $cupom->method('getType')->willReturn("currency");
+        $cupom->method('getTotal')->willReturn(5);
 
         $cart = new Cart();
         $cart->addProduct($productX);
@@ -82,9 +82,9 @@ class CartTest extends \PHPUnit_Framework_TestCase
         $productX->method('getPrice')->willReturn(15);
         $productX->method('getName')->willReturn("Product MOCKED");
 
-        $cupom = $this->getMockBuilder(Cupom::class)->getMock();
-        $cupom->method('getTotal')->willReturn(10);
-        $cupom->method('getType')->willReturn("percent");
+        $cupom = new CupomPercentage();
+        $cupom = $this->getMockBuilder(CupomPercentage::class)->getMock();
+        $cupom->method('getTotal')->willReturn(13.5);
 
         $cart = new Cart();
         $cart->addProduct($productX);
