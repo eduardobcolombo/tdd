@@ -22,10 +22,14 @@ class CartTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(30, $cart->getTotal());
     }
 
+    // It is a unit test using mock
     public function test_if_cart_items_are_being_returned()
     {
+        // With mock options we can emulate a class and specifie return values.
         $productX = $this->getMockBuilder(ProductX::class)->getMock();
+        // declare method and assign returns
         $productX->method('getPrice')->willReturn(22);
+        $productX->method('getName')->willReturn("Product MOCKED");
 
         $productX = new ProductX();
         $productX->setPrice(15);
