@@ -18,6 +18,11 @@ class Cart
         $this->total += $product->getPrice();
     }
 
+    public function applyCupom(Cupom $cupom)
+    {
+        $this->total -= $cupom->getTotal();
+    }
+
     public function getTotal()
     {
         return $this->total;

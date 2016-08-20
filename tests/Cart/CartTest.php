@@ -4,6 +4,7 @@ namespace CodeEducation\Cart\Tests;
 
 use CodeEducation\Cart\Cart;
 use CodeEducation\Cart\ProductX;
+use CodeEducation\Cart\Cupom;
 
 class CartTest extends \PHPUnit_Framework_TestCase
 {
@@ -48,5 +49,26 @@ class CartTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals($itemsExpected, $items);
 
+    }
+
+    // test with cupom unit test too
+    public function test_apply_cupom_and_check_if_its_returning_the_correct_total()
+    {
+        // With mock options we can emulate a class and specifie return values.
+        $productX = $this->getMockBuilder(ProductX::class)->getMock();
+        // declare method and assign returns
+        $productX->method('getPrice')->willReturn(15);
+        $productX->method('getName')->willReturn("Product MOCKED");
+
+        $cupom = $this->getMockBuilder(Cupom::class)->getMock();
+        $cupom->method('getTotal')->willReturn(10);
+
+        $cart = new Cart();
+        $cart->addProduct($productX);
+        // adding cupom
+        $cart->applyCupom($cupom);
+        $total = $cart->getTotal();
+
+        $this->assertEquals(5, $total);
     }
 }
