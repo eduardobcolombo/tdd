@@ -24,6 +24,9 @@ class CartTest extends \PHPUnit_Framework_TestCase
 
     public function test_if_cart_items_are_being_returned()
     {
+        $productX = $this->getMockBuilder(ProductX::class)->getMock();
+        $productX->method('getPrice')->willReturn(22);
+
         $productX = new ProductX();
         $productX->setPrice(15);
 
